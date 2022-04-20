@@ -14,20 +14,17 @@ ValidationBarcodeDigitVerifier {
     array.reverse();
 
     let multiplier = 2;
-    let result = 0;
-    for (let i = 0; i < array.length; i++) {
-      if (multiplier > 9) {
-        multiplier = 2;
-      }
-      result += parseInt(array[i]) * multiplier;
-      multiplier++;
-    }
+
+    const result = array.reduce((acc, current) => {
+      const soma = Number(current) * multiplier;
+      multiplier = multiplier === 9 ? 2 : multiplier + 1;
+      return acc + soma;
+    }, 0);
 
     const restOfDivision = result % 11;
     const digitVerifier = 11 - restOfDivision;
 
     return digitVerifierRequest === digitVerifier;
-
 
   }
 
