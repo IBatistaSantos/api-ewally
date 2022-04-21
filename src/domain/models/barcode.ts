@@ -1,9 +1,7 @@
 
 export class Barcode {
   static  generateBarcode(barCode: string): string {
-    const array = barCode
-      .replace(/(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d{1})(\d{14})/, '$1.$2.$3.$4.$5.$6.$7.$8')
-      .split('.');
+    const array = this.formatBarCode(barCode);
 
     let bankAndCurrent = barCode.substring(0, 4);
     const dvCodBanck = array[6];
@@ -16,4 +14,10 @@ export class Barcode {
 
   }
 
+
+  static formatBarCode(barCode: string): string[] {
+    return barCode
+      .replace(/(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d{1})(\d{14})/, '$1.$2.$3.$4.$5.$6.$7.$8')
+      .split('.');
+  }
 }

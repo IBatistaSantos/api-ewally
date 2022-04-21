@@ -14,9 +14,7 @@ export class  CalculationModuleDigitVerifierDealerships implements  ValidationBa
   }
 
   private async calculationModulo10(barCode: string): Promise<boolean> {
-    const barCodeArray = barCode
-      .replace(/(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})/, '$1.$2.$3.$4.$5.$6.$7.$8')
-      .split('.');
+    const barCodeArray = this.formatBarCodeModulo10(barCode);
 
 
     const groupOneBarcode = barCodeArray[0];
@@ -42,9 +40,7 @@ export class  CalculationModuleDigitVerifierDealerships implements  ValidationBa
   }
 
   private async calculationModulo11(barCode: string): Promise<boolean> {
-    const barCodeArray = barCode
-      .replace(/(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})/, '$1.$2.$3.$4.$5.$6.$7.$8')
-      .split('.');
+    const barCodeArray = this.formatBarCodeModulo11(barCode);
 
 
     const groupOneBarcode = barCodeArray[0];
@@ -93,6 +89,20 @@ export class  CalculationModuleDigitVerifierDealerships implements  ValidationBa
 
     return digit === validatorDigit;
 
+  }
+
+
+  private  formatBarCodeModulo10(barCode: string) {
+    return barCode
+      .replace(/(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})/, '$1.$2.$3.$4.$5.$6.$7.$8')
+      .split('.');
+
+  }
+
+  private formatBarCodeModulo11(barCode: string) {
+    return barCode
+      .replace(/(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})(\d{11})(\d{1})/, '$1.$2.$3.$4.$5.$6.$7.$8')
+      .split('.');
   }
 }
 

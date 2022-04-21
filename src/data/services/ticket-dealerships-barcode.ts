@@ -28,37 +28,25 @@ export class TickerDealershipsBarcodeService implements TickerDealershipsBarcode
       throw new ValidationError('Barcode size is invalid. Size must be 47');
     }
 
-    const typeModuleCalculation = digitalLine
-      .charAt(2)
-      .includes('6' || '7') ? 'modulo10' :  'modulo11';
+    const typeModuleCalculation = Number(digitalLine.charAt(2));
+    const  typeModuleValid = [6, 7, 8, 9];
 
-    /*     const modulesCalculation = {
-      6: 'modulo10',
-      7: 'modulo10',
-      8: 'modulo11',
-      9: 'modulo11',
-    };
+    const isValidTypeModule = typeModuleValid.includes(typeModuleCalculation);
 
-    let moduleCalculation: string;
-
-    if (typeModuleCalculation === '6' || typeModuleCalculation === '7') {
-      moduleCalculation = 'modulo10';
-    } else if (typeModuleCalculation === '8' || typeModuleCalculation === '9') {
-      moduleCalculation = 'modulo11';
-    } else {
-      throw new ValidationError('Module calculation not found');
+    if (!isValidTypeModule) {
+      throw new ValidationError('Barcode type module is invalid');
     }
- */
-    /*    const moduleCalculation = modulesCalculation[typeModuleCalculation];
 
-
-    if (!moduleCalculation) {
-      throw new ValidationError('Module calculation not found');
-    } */
+    let selectModule;
+    if (typeModuleCalculation === 6 || typeModuleCalculation === 7) {
+      selectModule = 'modulo10';
+    } else {
+      selectModule = 'modulo11';
+    }
 
     const modulo10 = await this.calculationModule.validateDigitVerifier({
       barCode: digitalLine,
-      module: typeModuleCalculation,
+      module: selectModule as 'modulo10' | 'modulo11',
     });
 
     if (!modulo10) {
