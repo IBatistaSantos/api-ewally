@@ -30,7 +30,7 @@ ValidationBarcodeDigitVerifier {
 
   async validatorBarcodeSize(params: ValidationBarcodeSize.Params): Promise<ValidationBarcodeSize.Result> {
     const { digitalLine } = params;
-    return digitalLine.length === 47;
+    return digitalLine.length >= 47;
   }
 
   async validatorBarcodeOnlyNumber(params: ValidationBarcodeContainsOnlyNumber.Params):

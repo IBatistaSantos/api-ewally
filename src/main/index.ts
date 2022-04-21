@@ -1,3 +1,5 @@
+
+import '../main/config/module-alias';
 import { app } from '../main/config/app';
 
 app.listen(8080, () => {
