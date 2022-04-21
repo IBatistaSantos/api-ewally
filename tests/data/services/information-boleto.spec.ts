@@ -1,12 +1,12 @@
 import { MockProxy, mock } from 'jest-mock-extended';
 
 import { ValidationBarcodeContainsOnlyNumber, ValidationBarcodeDigitVerifier, ValidationBarcodeSize } from '../../../src/data/contracts/validation';
-import { InformationBoletoService } from '../../../src/data/services';
+import { BankBondsBarcodeService } from '../../../src/data/services';
 import { ValidationError } from '../../../src/domain/errors/validation';
 import { Boleto } from '../../../src/domain/models';
 
-describe('InformationBoletoService', () => {
-  let sut: InformationBoletoService;
+describe('BankBondsBarcode', () => {
+  let sut: BankBondsBarcodeService;
   let validation: MockProxy<ValidationBarcodeContainsOnlyNumber & ValidationBarcodeSize & ValidationBarcodeDigitVerifier >;
 
   let digitalLine: string;
@@ -21,7 +21,7 @@ describe('InformationBoletoService', () => {
     validation.validateDigitVerifier.mockResolvedValue(true);
   });
   beforeEach(() => {
-    sut = new InformationBoletoService(validation);
+    sut = new BankBondsBarcodeService(validation);
   });
   it('should call InformationBoletoService with correct parameters', async () => {
     const spy = jest.spyOn(sut, 'execute');

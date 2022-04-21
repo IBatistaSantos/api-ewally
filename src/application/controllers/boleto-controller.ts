@@ -1,4 +1,4 @@
-import { InformationBoletoService } from '../../data/services';
+import { BankBondsBarcodeService } from '../../data/services';
 import { ValidationError } from '../../domain/errors/validation';
 import { badRequest, ok, HttpResponse } from '../helpers';
 import { Controller } from './controller';
@@ -9,13 +9,13 @@ type Model = object | ValidationError;
 
 
 export class BoletoController extends Controller {
-  constructor(private readonly informationBoletoService:InformationBoletoService ) {
+  constructor(private readonly bankBondsService:BankBondsBarcodeService ) {
     super();
   }
 
   async perform({ digitalLine }: HttpRequest): Promise<HttpResponse<Model>> {
     try {
-      const boleto = await this.informationBoletoService.execute({ digitalLine });
+      const boleto = await this.bankBondsService.execute({ digitalLine });
       return ok(boleto);
     } catch (error) {
       if (error instanceof ValidationError) {

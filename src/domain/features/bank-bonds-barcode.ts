@@ -1,10 +1,10 @@
 import { ValidationError } from '../errors/validation';
 
-export interface InformationBoleto {
-  execute: (params: InformationBoleto.Params) => Promise<InformationBoleto.Result>
+export interface BankBondsBarcode {
+  execute: (params: BankBondsBarcode.Params) => Promise<BankBondsBarcode.Result>
 }
 
-export namespace InformationBoleto {
+export namespace BankBondsBarcode {
   export type Params = {
     digitalLine: string
   };

@@ -1,17 +1,17 @@
 import { ValidationError } from '../../domain/errors/validation';
-import { InformationBoleto } from '../../domain/features';
+import { BankBondsBarcode } from '../../domain/features';
 import { Barcode } from '../../domain/models/barcode';
 import { Boleto } from '../../domain/models/boleto';
 import { ValidationBarcodeContainsOnlyNumber, ValidationBarcodeSize, ValidationBarcodeDigitVerifier } from '../contracts/validation';
 
 
-export  class InformationBoletoService implements InformationBoleto {
+export  class BankBondsBarcodeService implements BankBondsBarcode {
 
   constructor(
     private readonly validation: ValidationBarcodeContainsOnlyNumber & ValidationBarcodeSize & ValidationBarcodeDigitVerifier,
   ) { }
 
-  async execute(params: InformationBoleto.Params): Promise<InformationBoleto.Result> {
+  async execute(params: BankBondsBarcode.Params): Promise<BankBondsBarcode.Result> {
     const { digitalLine } = params;
 
     const isBarcodeContainsOnlyNumber = await this.validation.validatorBarcodeOnlyNumber({ digitalLine });

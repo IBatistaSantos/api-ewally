@@ -1,1 +1,1 @@
-export * from './information-boleto';
+export * from './bank-bonds-barcode';
