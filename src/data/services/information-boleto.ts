@@ -1,5 +1,6 @@
 import { ValidationError } from '../../domain/errors/validation';
 import { InformationBoleto } from '../../domain/features';
+import { Barcode } from '../../domain/models/barcode';
 import { Boleto } from '../../domain/models/boleto';
 import { ValidationBarcodeContainsOnlyNumber, ValidationBarcodeSize, ValidationBarcodeDigitVerifier } from '../contracts/validation';
 
@@ -10,38 +11,39 @@ export  class InformationBoletoService implements InformationBoleto {
     private readonly validation: ValidationBarcodeContainsOnlyNumber & ValidationBarcodeSize & ValidationBarcodeDigitVerifier,
   ) { }
 
-
   async execute(params: InformationBoleto.Params): Promise<InformationBoleto.Result> {
-    const { barCode } = params;
+    const { digitalLine } = params;
 
-    const isBarcodeContainsOnlyNumber = await this.validation.validatorBarcodeOnlyNumber({ barCode });
+    const isBarcodeContainsOnlyNumber = await this.validation.validatorBarcodeOnlyNumber({ digitalLine });
 
     if (!isBarcodeContainsOnlyNumber) {
       throw new ValidationError('Barcode not contains only number');
     }
 
-    const isValidSizeBarcode = await this.validation.validatorBarcodeSize({ barCode });
+    const isValidSizeBarcode = await this.validation.validatorBarcodeSize({ digitalLine });
 
     if (!isValidSizeBarcode) {
-      throw new ValidationError('Barcode size is invalid. Size must be 44');
+      throw new ValidationError('Barcode size is invalid. Size must be 47');
     }
 
-    const validDigigVerifierBarcode = await this.validation.validateDigitVerifier({ barCode });
+    const generateBarcode = Barcode.generateBarcode(digitalLine);
+
+    const validDigigVerifierBarcode = await this.validation.validateDigitVerifier({ barCode: generateBarcode });
 
     if (!validDigigVerifierBarcode) {
       throw new ValidationError('Barcode digit verifier is invalid');
     }
 
-    const valueValid = Boleto.value(barCode) < 1;
+    const valueValid = Boleto.value(generateBarcode) < 1;
 
     if (valueValid) {
       throw new ValidationError('Barcode value is invalid');
     }
 
     return {
-      expirationDate: Boleto.expirationDate(barCode),
-      value: Boleto.value(barCode),
-      barCode,
+      expirationDate: Boleto.expirationDate(generateBarcode),
+      value: Boleto.value(generateBarcode),
+      barCode: generateBarcode,
     };
   }
 }

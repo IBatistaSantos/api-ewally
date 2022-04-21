@@ -6,7 +6,7 @@ export interface InformationBoleto {
 
 export namespace InformationBoleto {
   export type Params = {
-    barCode: string
+    digitalLine: string
   };
 
   export type Result = object | ValidationError;

@@ -4,7 +4,7 @@ export interface ValidationBarcodeContainsOnlyNumber {
 
 export namespace ValidationBarcodeContainsOnlyNumber {
   export type Params = {
-    barCode: string
+    digitalLine: string
   };
   export type Result = boolean;
 }

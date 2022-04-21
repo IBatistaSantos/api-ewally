@@ -3,7 +3,7 @@ import { ValidationError } from '../../domain/errors/validation';
 import { badRequest, ok, HttpResponse } from '../helpers';
 import { Controller } from './controller';
 
-type HttpRequest = { barCode: string };
+type HttpRequest = { digitalLine: string };
 
 type Model = object | ValidationError;
 
@@ -13,9 +13,9 @@ export class BoletoController extends Controller {
     super();
   }
 
-  async perform({ barCode }: HttpRequest): Promise<HttpResponse<Model>> {
+  async perform({ digitalLine }: HttpRequest): Promise<HttpResponse<Model>> {
     try {
-      const boleto = await this.informationBoletoService.execute({ barCode });
+      const boleto = await this.informationBoletoService.execute({ digitalLine });
       return ok(boleto);
     } catch (error) {
       if (error instanceof ValidationError) {

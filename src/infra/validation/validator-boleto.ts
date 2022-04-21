@@ -29,13 +29,13 @@ ValidationBarcodeDigitVerifier {
   }
 
   async validatorBarcodeSize(params: ValidationBarcodeSize.Params): Promise<ValidationBarcodeSize.Result> {
-    const { barCode } = params;
-    return barCode.length === 44;
+    const { digitalLine } = params;
+    return digitalLine.length === 47;
   }
 
   async validatorBarcodeOnlyNumber(params: ValidationBarcodeContainsOnlyNumber.Params):
   Promise<ValidationBarcodeContainsOnlyNumber.Result> {
-    const { barCode } = params;
-    return !!barCode.match(/^[0-9]*$/);
+    const { digitalLine } = params;
+    return !!digitalLine.match(/^[0-9]*$/);
   }
 }

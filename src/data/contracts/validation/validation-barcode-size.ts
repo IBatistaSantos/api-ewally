@@ -4,7 +4,7 @@ export interface ValidationBarcodeSize {
 
 export namespace ValidationBarcodeSize {
   export type Params = {
-    barCode: string
+    digitalLine: string
   };
   export type Result = boolean;
 }
