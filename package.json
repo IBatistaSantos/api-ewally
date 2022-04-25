@@ -21,6 +21,7 @@
   },
   "scripts": {
     "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:coverage": "jest --passWithNoTests --coverage --no-cache --runInBand",
     "dev": "ts-node-dev --respawn --transpile-only src/main",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "start": "npm run build & node dist/main"
