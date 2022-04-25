@@ -8,7 +8,7 @@ describe('Boleto', () => {
     barCode = '00193373700000001000500940144816060680935031';
   });
   it('should expirationDate returns a date', () => {
-    const dateReturned = new Date('2017-12-11T02:00:00.000Z');
+    const dateReturned = new Date(' 2017-12-11T00:00:00.000Z');
     const result = Boleto.expirationDate(barCode);
     expect(result).toEqual(dateReturned);
   });

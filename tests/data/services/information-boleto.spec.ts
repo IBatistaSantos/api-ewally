@@ -80,7 +80,7 @@ describe('BankBondsBarcode', () => {
   it('should return an AccessToken on success', async () => {
     const authResult = await sut.execute({ digitalLine });
     const result = {
-      expirationDate: new Date('2017-12-11T02:00:00.000Z'),
+      expirationDate: new Date('2017-12-11T00:00:00.000Z'),
       value: 1,
       barCode:'00193373700000001000500940144816060680935031',
     };
