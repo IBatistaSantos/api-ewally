@@ -12,7 +12,7 @@ describe('TicketDealershipsBarcode', () => {
   let digitalLine: string;
 
   beforeAll(() => {
-    digitalLine = '00190500954014481606906809350314337370000000100';
+    digitalLine = '856900000584030100649158110347945609001374691358';
     validation = mock();
     calculationModule = mock();
 
