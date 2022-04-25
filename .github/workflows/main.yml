@@ -38,6 +38,3 @@ jobs:
     - name: Check tests
       run: yarn test:coverage
 
-    - name: Check linting
-      run: yarn lint
-          echo test, and deploy your project.
